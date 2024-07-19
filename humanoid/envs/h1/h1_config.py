@@ -26,8 +26,8 @@ class H1RoughCfg( LeggedRobotCfg ):
         }
     
     class env(LeggedRobotCfg.env):
-        num_envs = 1500
-        frame_stack = 40
+        num_envs = 4000
+        frame_stack = 15
         c_frame_stack = 3
         num_single_obs = 66 # 66 for global state, and 42 for obs
         use_privileged_obs = True
@@ -214,7 +214,7 @@ class H1RoughCfg( LeggedRobotCfg ):
 
 class H1RoughCfgPPO( LeggedRobotCfgPPO ):
     class policy( LeggedRobotCfgPPO.policy ):
-        policy_type = 'steering' # standing, moving, and steering
+        policy_type = 'moving' # standing, moving, and steering
         architecture = 'Trans' # choose from 'Mix', 'Trans', 'MLP', and 'RNN'
         teaching_model_path = '/home/ziluoding/humanoid-gym/logs/h1/Jul11_16-30-02_/model_12000.pt'
         moving_model_path = '/home/ziluoding/humanoid-gym/logs/h1/Jul11_16-30-02_/model_12000.pt'
