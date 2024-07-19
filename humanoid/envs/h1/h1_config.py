@@ -32,7 +32,7 @@ class H1RoughCfg( LeggedRobotCfg ):
         num_single_obs = 66 # 66 for global state, and 42 for obs
         use_privileged_obs = True
         num_actions = 10
-        num_observations = num_single_obs # int(frame_stack * num_single_obs) for MLP 
+        num_observations = num_single_obs # int(frame_stack * num_single_obs) for MLP, num_single_obs for Trans
         num_teaching_observations = int(frame_stack * (num_single_obs-1))
         single_num_privileged_obs = 65
         num_privileged_obs = int(c_frame_stack * single_num_privileged_obs)
@@ -200,7 +200,7 @@ class H1RoughCfg( LeggedRobotCfg ):
         clip_actions = 100.
 
     class noise:
-        add_noise = False
+        add_noise = True
         noise_level = 1.0 # scales other values
         class noise_scales:
             dof_pos = 0.01
@@ -214,10 +214,10 @@ class H1RoughCfg( LeggedRobotCfg ):
 
 class H1RoughCfgPPO( LeggedRobotCfgPPO ):
     class policy( LeggedRobotCfgPPO.policy ):
-        policy_type = 'moving' # standing, moving, and steering
+        policy_type = 'steering' # standing, moving, and steering
         architecture = 'Trans' # choose from 'Mix', 'Trans', 'MLP', and 'RNN'
-        teaching_model_path = '/home/ps/humanoid-gym/logs/h1/MLP_best/model_15000.pt'
-        moving_model_path = '/home/ps/humanoid-gym/logs/h1/MLP_best/model_15000.pt'
+        teaching_model_path = '/home/ziluoding/humanoid-gym/logs/h1/Jul11_16-30-02_/model_12000.pt'
+        moving_model_path = '/home/ziluoding/humanoid-gym/logs/h1/Jul11_16-30-02_/model_12000.pt'
         init_noise_std = 1.0
         actor_hidden_dims = [512, 256, 128]
         critic_hidden_dims = [512, 256, 128]
@@ -244,7 +244,6 @@ class H1RoughCfgPPO( LeggedRobotCfgPPO ):
         max_grad_norm = 0.2
 
     class runner( LeggedRobotCfgPPO.runner ):
-        run_name = ''
         experiment_name = 'h1'
         policy_class_name = 'ActorCritic'
         algorithm_class_name = 'PPO'
@@ -254,7 +253,7 @@ class H1RoughCfgPPO( LeggedRobotCfgPPO ):
         # logging
         save_interval = 1000 # check for potential saves every this many iterations
         experiment_name = 'test'
-        run_name = ''
+        run_name = 'h1'
         # load and resume
         resume = False
         load_run = -1 # -1 = last run

@@ -13,6 +13,7 @@
 ### H1RoughCfg
 
 * env.num_single_obs = 66 # 66 for global state, and 42 for obs
+You may need to change line 85 of humanoid/algo/models/model.py (self.obs_dim) accordingly.
 
 * domain_rand.randomize_friction, randomize_base_mass, push_robots, and noise.add_noise are set to False at the first stage
 

@@ -64,7 +64,7 @@ class OnPolicyRunner:
             num_critic_obs = self.env.num_privileged_obs
         else:
             num_critic_obs = self.env.num_obs
-        print(self.policy_cfg["architecture"])
+        #print(self.policy_cfg["architecture"])
         if self.policy_cfg["architecture"] == 'RNN':
             actor_critic_class = eval('ActorCriticRecurrent')  # ActorCritic
             actor_critic: ActorCriticRecurrent = actor_critic_class(

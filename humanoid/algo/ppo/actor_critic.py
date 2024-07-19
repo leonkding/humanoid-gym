@@ -51,7 +51,6 @@ class ActorCritic(nn.Module):
         if kwargs:
             print("ActorCritic.__init__ got unexpected arguments, which will be ignored: " + str([key for key in kwargs.keys()]))
         super(ActorCritic, self).__init__()
-        print(kwargs.keys())
 
         activation = get_activation(activation)
         mlp_input_dim_a = num_actor_obs
@@ -92,7 +91,7 @@ class ActorCritic(nn.Module):
             else:
                 critic_layers.append(nn.Linear(critic_hidden_dims[l], critic_hidden_dims[l + 1]))
                 critic_layers.append(activation)
-        print(critic_layers)
+        #print(critic_layers)
         self.critic = nn.Sequential(*critic_layers)
 
         print(f"Actor T: {self.actor}")
@@ -185,7 +184,7 @@ class Teaching_ActorCritic(nn.Module):
         if kwargs:
             print("Teaching_ActorCritic.__init__ got unexpected arguments, which will be ignored: " + str([key for key in kwargs.keys()]))
         super(Teaching_ActorCritic, self).__init__()
-        print(kwargs.keys())
+        #print(kwargs.keys())
 
         self.num_actor_obs = num_actor_obs
         mlp_input_dim_a = num_teaching_actor_obs
