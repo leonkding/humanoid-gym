@@ -225,8 +225,11 @@ class LeggedRobot(BaseTask):
 
         for i in range(len(self.reward_functions)):
             name = self.reward_names[i]
-            rew = self.reward_functions[i]() 
-            rew = rew * self.standing_reward_scales[name]
+            rew = self.reward_functions[i]()
+            if self.status == "standing":
+                rew = rew * self.standing_reward_scales[name]
+            else:
+                rew = rew * self.reward_scales[name]
             #rew[self.moving_idx] = rew[self.moving_idx] * self.reward_scales[name]
             #rew[self.standing_idx] = rew[self.standing_idx] * self.standing_reward_scales[name]
             self.rew_buf += rew
@@ -450,7 +453,7 @@ class LeggedRobot(BaseTask):
             env_ids (List[int]): ids of environments being reset
         """
         # If the tracking reward is above 80% of the maximum, increase the range of commands
-        print('The tracking level is %d', %(torch.mean(self.episode_sums["tracking_lin_vel"][env_ids]) / (self.reward_scales["tracking_lin_vel"] * self.max_episode_length)))
+        print('The tracking level is' + str((torch.mean(self.episode_sums["tracking_lin_vel"][env_ids]) / (self.reward_scales["tracking_lin_vel"] * self.max_episode_length))))
         if torch.mean(self.episode_sums["tracking_lin_vel"][env_ids]) / self.max_episode_length > 0.8 * self.reward_scales["tracking_lin_vel"]:
             self.command_ranges["lin_vel_x"][0] = np.clip(self.command_ranges["lin_vel_x"][0] - 0.5, -self.cfg.commands.max_curriculum, 0.)
             self.command_ranges["lin_vel_x"][1] = np.clip(self.command_ranges["lin_vel_x"][1] + 0.5, 0., self.cfg.commands.max_curriculum)

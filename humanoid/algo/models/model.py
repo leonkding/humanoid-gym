@@ -82,13 +82,12 @@ class PPOTransformerModel(nn.Module):
             - policy: (torch.Tensor): policy with shape (batch_size,num_action)
             - value: (torch.Tensor): value with shape (batch_size,1)
         """
-        #print(state.shape)
         self.obs_dim = 66
-        self.act_dim = 10
+        #self.act_dim = 10
         batch_size, seq_length = states.shape[0], int(states.shape[1]/self.obs_dim)
 
         states = states.view(batch_size, seq_length, self.obs_dim)
-        actions = states[:,:,26:26+self.act_dim]
+        #actions = states[:,:,26:26+self.act_dim]
         #timesteps = states[:,:, 0].long()
         #batch_size, seq_length, _ = state.shape
         if memory_mask is None:
