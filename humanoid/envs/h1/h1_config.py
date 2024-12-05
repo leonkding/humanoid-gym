@@ -26,8 +26,8 @@ class H1RoughCfg( LeggedRobotCfg ):
         }
     
     class env(LeggedRobotCfg.env):
-        num_envs = 1500
-        frame_stack = 40
+        num_envs = 4000
+        frame_stack = 15
         c_frame_stack = 3
         num_single_obs = 66 # 66 for global state, and 42 for obs
         use_privileged_obs = True
@@ -121,38 +121,38 @@ class H1RoughCfg( LeggedRobotCfg ):
             feet_clearance = 1.
             feet_contact_number = 1.2
             # # gait
-            feet_air_time = 1.
-            foot_slip = -0.05
-            # feet_distance = 1
-            # knee_distance = 1
+#             feet_air_time = 1.
+#             foot_slip = -0.05
+             #feet_distance = 1 * 0
+             #knee_distance = 1 * 0
             # # contact
-            # feet_contact_forces = -0.01
-            # # vel tracking
-            # tracking_lin_vel = 1.2 
-            # tracking_ang_vel = 1.1
-            # vel_mismatch_exp = 0.5  # lin_z; ang x,y
-            # low_speed = 0.2
-            # track_vel_hard = 0.5
+#             feet_contact_forces = -0.01
+#             # vel tracking
+            tracking_lin_vel = 1.1 * 4
+            tracking_ang_vel = 1.1 * 2
+#             vel_mismatch_exp = 0.5 * 1 # lin_z; ang x,y
+#             low_speed = 0.2 * 1
+#             track_vel_hard = 0.5 * 1
             # # base pos
-            # default_joint_pos = 0.5
+             #default_joint_pos = 0.5 * 0
             orientation = 1.
-            base_height = 0.2
-            # base_acc = 0.2
+            base_height = 1
+#             base_acc = 0.2
             # # energy
-            # action_smoothness = -0.002
-            # torques = -1e-5
-            # dof_vel = -5e-4
-            # dof_acc = -1e-7
-            # collision = -1.
+#             action_smoothness = -0.002
+#             torques = -1e-5
+#             dof_vel = -5e-4
+#             dof_acc = -1e-7
+             #collision = -1.
 
-            tracking_lin_vel = 1.0
-            tracking_ang_vel = 0.5
+#             tracking_lin_vel = 1.0
+#             tracking_ang_vel = 0.5
             lin_vel_z = -2.0
             ang_vel_xy = -1.0
-            #orientation = -1.0
-            #base_height = -100.0
+             #orientation = -1.0
+             #base_height = -100.0
             dof_acc = -3.5e-8
-            #feet_air_time = 1.0
+            feet_air_time = 1.0
             collision = 0.0
             action_rate = -0.01
             torques = 0.0
